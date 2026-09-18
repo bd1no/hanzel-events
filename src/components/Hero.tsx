@@ -53,7 +53,7 @@ export function Hero({ onOpenEnquiry, onOpenStory }: HeroProps) {
     setActiveVideoIndex(nextIdx);
     try {
       sessionStorage.setItem("hanzel_hero_video_index", nextIdx.toString());
-    } catch {}
+    } catch { }
   };
 
   return (
@@ -135,14 +135,28 @@ export function Hero({ onOpenEnquiry, onOpenStory }: HeroProps) {
 
       {/* Main Hero Center Content */}
       <div className="relative z-20 mx-auto max-w-4xl w-full px-6 text-center my-auto py-12">
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light tracking-wide leading-[1.1] text-ivory drop-shadow-2xl">
-          Every celebration <br />
-          {activeVideoIndex === 2 ? (
-            <span className="font-normal italic" style={{ color: '#F5D89A' }}>should unfold like a starry night.</span>
-          ) : (
-            <span className="font-normal italic text-rosegold">should arrive like a love letter.</span>
-          )}
-        </h1>
+        {activeVideoIndex === 2 ? (
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light tracking-wide leading-[1.1] text-ivory drop-shadow-2xl">
+            Your story <br />
+            <span className="font-normal italic" style={{ color: '#F5D89A' }}>
+              should unfold like a starry night.
+            </span>
+          </h1>
+        ) : activeVideoIndex === 1 ? (
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light tracking-wide leading-[1.1] text-ivory drop-shadow-2xl">
+            Your right choice, <br />
+            <span className="font-normal italic" style={{ color: '#F5D89A' }}>
+              where budget meets luxury.
+            </span>
+          </h1>
+        ) : (
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light tracking-wide leading-[1.1] text-ivory drop-shadow-2xl">
+            Every celebration <br />
+            <span className="font-normal italic text-rosegold">
+              should arrive like a love letter.
+            </span>
+          </h1>
+        )}
 
         <p className="mt-6 max-w-xl mx-auto font-body text-sm sm:text-base leading-relaxed text-ivory/80">
           Hanzel Events is an elite wedding planning and production house. We compose your special day as a seamless symphony — from floral architecture and mandap styling to cinematic lighting and royal guest experience.

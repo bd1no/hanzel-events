@@ -125,12 +125,259 @@ body {
   animation: floatSlow 8s ease-in-out infinite alternate;
 }
 
+/* Upward flowing golden particles */
+@keyframes floatUpwards {
+  0% {
+    transform: translateY(60px) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-160px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+.flowing-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff2c6 0%, #e5b8a6 50%, rgba(212, 175, 55, 0.2) 80%);
+  box-shadow: 0 0 14px 3px rgba(245, 216, 154, 0.8);
+  pointer-events: none;
+  animation: floatUpwards linear infinite;
+}
+
+/* Dynamic Multi-Color Ambient Lights Breathing/Drifting Animations */
+@keyframes ambientFadeRed {
+  0%, 100% {
+    opacity: 0.1;
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    opacity: 0.32;
+    transform: translate(25px, -15px) scale(1.12);
+  }
+}
+
+@keyframes ambientFadeGreen {
+  0%, 100% {
+    opacity: 0.08;
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    opacity: 0.28;
+    transform: translate(-20px, 20px) scale(1.14);
+  }
+}
+
+@keyframes ambientFadeBlue {
+  0%, 100% {
+    opacity: 0.09;
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(-18px, 22px) scale(1.14);
+  }
+}
+
+@keyframes ambientFadeYellow {
+  0%, 100% {
+    opacity: 0.08;
+    transform: translate(0, 0) scale(0.95);
+  }
+  50% {
+    opacity: 0.28;
+    transform: translate(20px, -18px) scale(1.12);
+  }
+}
+
+.ambient-light-red {
+  animation: ambientFadeRed 9s ease-in-out infinite alternate;
+}
+
+.ambient-light-green {
+  animation: ambientFadeGreen 11s ease-in-out infinite alternate 1.5s;
+}
+
+.ambient-light-blue {
+  animation: ambientFadeBlue 10s ease-in-out infinite alternate 3s;
+}
+
+.ambient-light-yellow {
+  animation: ambientFadeYellow 8.5s ease-in-out infinite alternate 2s;
+}
+
+/* Ethereal Silk & Iridescent Styles */
+.bg-iridescent-silk {
+  background: radial-gradient(ellipse at 20% 30%, rgba(255, 248, 240, 0.95) 0%, rgba(246, 235, 227, 0.9) 40%, rgba(235, 218, 212, 0.85) 70%, rgba(245, 238, 230, 0.95) 100%);
+}
+
+.iridescent-sheen {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(240, 220, 245, 0.3) 25%,
+    rgba(215, 240, 255, 0.4) 50%,
+    rgba(255, 235, 215, 0.4) 75%,
+    rgba(255, 255, 255, 0.7) 100%
+  );
+}
+
+.opal-gem {
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #d8f1ff 25%, #ffd6e8 50%, #d5e5ff 75%, #baa5c7 100%);
+  box-shadow: 0 0 12px rgba(230, 190, 255, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.9), inset 0 -2px 4px rgba(160, 130, 180, 0.4);
+}
+
+.pave-diamond {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e2e8f0 40%, #cbd5e1 70%, #94a3b8 100%);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.9), inset 0 1px 2px rgba(255, 255, 255, 1);
+}
+
+.gold-foil {
+  background: linear-gradient(135deg, #ffe082 0%, #ffd54f 25%, #ffb300 50%, #fff8e1 70%, #d4af37 100%);
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+}
+
+.deckle-paper {
+  background: #fbf7f0;
+  box-shadow: 0 20px 50px rgba(80, 50, 40, 0.12), 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes glimmerShimmer {
+  0%, 100% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 8px rgba(255, 230, 200, 0.5));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(255, 245, 220, 0.9));
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 7s ease-in-out infinite;
+}
+
+.animate-glimmer {
+  animation: glimmerShimmer 3.5s ease-in-out infinite;
+}
+
+/* Heavenly god-ray shimmer for the Services section */
+@keyframes rayShimmer {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.god-ray {
+  animation: rayShimmer 7s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Slow breathing halo behind the light source / crown diamond */
+@keyframes haloBreathe {
+  0%, 100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.light-halo {
+  animation: haloBreathe 6.5s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Faint drifting dust caught in the light beam */
+@keyframes moteDrift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(140px) translateX(14px);
+    opacity: 0;
+  }
+}
+
+.light-mote {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff4d4 0%, rgba(245, 216, 154, 0.5) 55%, transparent 80%);
+  box-shadow: 0 0 8px 2px rgba(245, 216, 154, 0.55);
+  pointer-events: none;
+  animation: moteDrift linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Cherry blossom petals drifting upward — replaces the plain golden flowing dots */
+@keyframes petalFloat {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-55vh) translateX(var(--petal-drift, 30px)) rotate(190deg);
+  }
+  88% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(calc(var(--petal-drift, 30px) * -0.6)) rotate(340deg);
+    opacity: 0;
+  }
+}
+
+.blossom-petal {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(135deg, #ffe3ec 0%, #f9bdd2 55%, #f2a2bd 100%);
+  border-radius: 0 100% 0 100%;
+  box-shadow: 0 0 6px rgba(242, 162, 189, 0.45);
+  animation: petalFloat linear infinite;
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .sparkle-particle,
-  .wax-seal {
+  .wax-seal,
+  .animate-float-gentle,
+  .animate-glimmer,
+  .god-ray,
+  .light-halo,
+  .light-mote,
+  .blossom-petal {
     animation: none !important;
   }
 }

@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Sparkles, Award, MapPin } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 
-export function AboutStudio() {
+interface AboutStudioProps {
+  onOpenEnquiry?: () => void;
+}
+
+export function AboutStudio({ onOpenEnquiry }: AboutStudioProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -27,193 +31,146 @@ export function AboutStudio() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative bg-ivory text-noir py-24 px-6 overflow-hidden"
+      className="relative bg-[#f7ede4] text-noir py-24 sm:py-32 px-6 overflow-hidden"
+      style={{
+        background: "radial-gradient(ellipse at 15% 30%, #fdf5ef 0%, #f7ebe1 45%, #f3e4d7 100%)",
+      }}
     >
-      {/* Torn paper edge at top */}
-      <div className="absolute top-0 left-0 right-0 h-6 bg-ivory" style={{
-        maskImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 1200 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q 15 0 30 15 Q 45 5 60 18 Q 75 2 90 14 Q 105 0 120 16 Q 135 3 150 17 Q 165 1 180 15 Q 195 4 210 18 Q 225 0 240 14 Q 255 5 270 17 Q 285 2 300 16 Q 315 0 330 15 Q 345 3 360 18 Q 375 1 390 14 Q 405 4 420 17 Q 435 0 450 16 Q 465 5 480 15 Q 495 2 510 18 Q 525 0 540 14 Q 555 3 570 17 Q 585 1 600 16 Q 615 4 630 15 Q 645 0 660 18 Q 675 5 690 14 Q 705 2 720 17 Q 735 0 750 16 Q 765 3 780 15 Q 795 1 810 18 Q 825 4 840 14 Q 855 0 870 17 Q 885 5 900 16 Q 915 2 930 15 Q 945 0 960 18 Q 975 3 990 14 Q 1005 1 1020 17 Q 1035 4 1050 16 Q 1065 0 1080 15 Q 1095 5 1110 18 Q 1125 2 1140 14 Q 1155 0 1170 17 Q 1185 3 1200 16 L 1200 20 L 0 20 Z' fill='white'/%3E%3C/svg%3E\")",
-        WebkitMaskImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 1200 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q 15 0 30 15 Q 45 5 60 18 Q 75 2 90 14 Q 105 0 120 16 Q 135 3 150 17 Q 165 1 180 15 Q 195 4 210 18 Q 225 0 240 14 Q 255 5 270 17 Q 285 2 300 16 Q 315 0 330 15 Q 345 3 360 18 Q 375 1 390 14 Q 405 4 420 17 Q 435 0 450 16 Q 465 5 480 15 Q 495 2 510 18 Q 525 0 540 14 Q 555 3 570 17 Q 585 1 600 16 Q 615 4 630 15 Q 645 0 660 18 Q 675 5 690 14 Q 705 2 720 17 Q 735 0 750 16 Q 765 3 780 15 Q 795 1 810 18 Q 825 4 840 14 Q 855 0 870 17 Q 885 5 900 16 Q 915 2 930 15 Q 945 0 960 18 Q 975 3 990 14 Q 1005 1 1020 17 Q 1035 4 1050 16 Q 1065 0 1080 15 Q 1095 5 1110 18 Q 1125 2 1140 14 Q 1155 0 1170 17 Q 1185 3 1200 16 L 1200 20 L 0 20 Z' fill='white'/%3E%3C/svg%3E\")",
-        maskSize: "100% 100%",
-        WebkitMaskSize: "100% 100%",
-        transform: "translateY(-100%) scaleY(-1)",
-      }} />
-
-      {/* Background Subtle Watermark Logo */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.04] pointer-events-none w-96 h-96">
-        <img src="/logo.png" alt="" className="w-full h-full object-contain" />
+      {/* Delicate Floral / Architectural Line Art Background Accents */}
+      <div className="absolute right-4 top-12 bottom-12 w-1/3 pointer-events-none opacity-30">
+        <svg viewBox="0 0 400 600" fill="none" stroke="#b8977e" strokeWidth="1" className="w-full h-full">
+          {/* Subtle Archway outline */}
+          <path d="M 220 80 A 70 70 0 0 1 360 80 L 360 400 L 220 400 Z" strokeDasharray="4 4" />
+          <path d="M 240 100 A 50 50 0 0 1 340 100 L 340 380 L 240 380 Z" />
+          {/* Subtle botanical lines */}
+          <path d="M 120 450 C 180 400, 200 320, 220 260 C 230 230, 250 200, 290 190" />
+          <circle cx="290" cy="190" r="15" />
+          <circle cx="280" cy="180" r="20" />
+          <circle cx="295" cy="205" r="18" />
+          <path d="M 150 490 C 200 440, 240 400, 280 390" />
+        </svg>
       </div>
 
       <div className="mx-auto max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Brand Story */}
-          <div className="lg:col-span-7 space-y-8">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Story & Service Offerings Container */}
+          <div className="lg:col-span-7 space-y-7">
             {/* Tagline pill */}
             <div
               className="transition-all duration-700 ease-out"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                transform: isVisible ? "translateY(0)" : "translateY(25px)",
                 transitionDelay: "0ms",
               }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson/10 border border-crimson/20 text-crimson font-label text-[11px] tracking-[0.3em] uppercase font-semibold">
-                <Sparkles className="w-3 h-3" />
-                <span>THE HANZEL PHILOSOPHY – EST. 2022</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f4e2d4]/70 border border-[#dfc3b0] text-[#7a483a] font-label text-[10.5px] tracking-[0.28em] uppercase font-semibold shadow-sm">
+                <Sparkles className="w-3 h-3 text-[#b36952]" />
+                <span>THE HANZEL PHILOSOPHY — EST. 2022</span>
               </div>
             </div>
 
-            {/* Big Quote */}
+            {/* Main Big Quote */}
             <div
               className="transition-all duration-700 ease-out"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(40px)",
-                transitionDelay: "150ms",
+                transform: isVisible ? "translateY(0)" : "translateY(35px)",
+                transitionDelay: "120ms",
               }}
             >
-              <h2 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.12] text-noir">
-                &ldquo;We do not decorate a room. We set a table for a life that is about to change.&rdquo;
+              <h2 className="font-display text-4xl sm:text-5xl md:text-[3.35rem] leading-[1.14] text-[#422c27] font-normal tracking-tight">
+                “We do not decorate a room. We set a table for a life that is about to change.”
               </h2>
             </div>
 
-            {/* Body Copy */}
+            {/* Paragraph Description */}
             <div
               className="transition-all duration-700 ease-out"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(40px)",
-                transitionDelay: "300ms",
+                transform: isVisible ? "translateY(0)" : "translateY(35px)",
+                transitionDelay: "240ms",
               }}
             >
-              <p className="font-body text-base sm:text-lg leading-relaxed text-noir/70 max-w-2xl">
+              <p className="font-body text-sm sm:text-[15px] leading-relaxed text-[#5a433d]/85 max-w-2xl">
                 Founded as an elite wedding planning and production house, Hanzel Events brings an architectural approach to matrimony. Lighting, hospitality, floral sculpting, and sound are held in one unified conversation so your day arrives effortlessly.
               </p>
             </div>
 
-            {/* Feature Cards */}
+            {/* Service Offerings Iridescent Box (Replaces the 2 previous boxes) */}
             <div
-              className="grid sm:grid-cols-2 gap-5 pt-2 transition-all duration-700 ease-out"
+              className="pt-2 transition-all duration-700 ease-out"
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(40px)",
-                transitionDelay: "450ms",
+                transform: isVisible ? "translateY(0)" : "translateY(35px)",
+                transitionDelay: "360ms",
               }}
             >
-              <div className="flex items-start gap-3.5 p-5 rounded-xl bg-white/80 border border-noir/8 shadow-sm hover:shadow-md hover:border-crimson/20 transition-all duration-300 group">
-                <div className="p-2.5 rounded-lg bg-crimson text-ivory shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <Award className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-bold text-noir">Bespoke Curation</h3>
-                  <p className="font-body text-xs text-noir/65 mt-1 leading-relaxed">
-                    No template designs. Every mandap, palette, and floral installation is custom crafted.
-                  </p>
-                </div>
-              </div>
+              <div className="relative rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-[#d8beaa] shadow-[0_12px_35px_rgba(200,165,140,0.18)] backdrop-blur-md overflow-hidden bg-gradient-to-r from-[#fefbf8]/95 via-[#fcf5ed]/90 to-[#f8eee3]/95">
+                {/* Subtle Iridescent glow line */}
+                <div className="absolute -top-12 -left-12 w-48 h-48 bg-[#f5dfce]/40 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-[#e9d1bf]/40 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="flex items-start gap-3.5 p-5 rounded-xl bg-white/80 border border-noir/8 shadow-sm hover:shadow-md hover:border-crimson/20 transition-all duration-300 group">
-                <div className="p-2.5 rounded-lg bg-crimson text-ivory shrink-0 group-hover:scale-110 transition-transform duration-300">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-display text-lg font-bold text-noir">Pan-India Studios</h3>
-                  <p className="font-body text-xs text-noir/65 mt-1 leading-relaxed">
-                    Operating studios in Kochi, Hyderabad, Udaipur, Goa, and Bangalore.
-                  </p>
+                <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-start">
+                  {/* Left Column */}
+                  <div className="space-y-3">
+                    <h3 className="font-label text-xs sm:text-[13px] tracking-[0.22em] font-semibold text-[#8c6046] uppercase pb-1">
+                      SERVICE OFFERINGS
+                    </h3>
+                    <ul className="space-y-1.5 font-label text-[10.5px] sm:text-[11.5px] tracking-wider text-[#48342f] uppercase font-medium">
+                      <li className="hover:text-[#8c6046] transition-colors">FULL-SERVICE PLANNING</li>
+                      <li className="hover:text-[#8c6046] transition-colors">CONCEPTUAL DESIGN &amp; THEME DEVELOPMENT</li>
+                      <li className="hover:text-[#8c6046] transition-colors">VENDOR PROCUREMENT</li>
+                      <li className="hover:text-[#8c6046] transition-colors">LOGISTICS &amp; PRODUCTION</li>
+                    </ul>
+                  </div>
+
+                  {/* Right Column with Left Border Divider on Desktop */}
+                  <div className="sm:border-l sm:border-[#d8beaa]/70 sm:pl-7 space-y-1.5 font-label text-[10.5px] sm:text-[11.5px] tracking-wider text-[#48342f] uppercase font-medium pt-1 sm:pt-0">
+                    <div className="hover:text-[#8c6046] transition-colors">VENUE MANAGEMENT</div>
+                    <div className="hover:text-[#8c6046] transition-colors">FLORAL SCULPTING &amp; DECOR</div>
+                    <div className="hover:text-[#8c6046] transition-colors">LIGHTING &amp; SOUND PRODUCTION</div>
+                    <div className="hover:text-[#8c6046] transition-colors">CINEMATIC COVERAGE</div>
+                    <div className="hover:text-[#8c6046] transition-colors">POST-EVENT SERVICES</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Invitation Card */}
+          {/* Right Column: Architectural Mandap Card & Clean Enquire Button */}
           <div
-            className="lg:col-span-5 flex flex-col items-center justify-start lg:pt-6 transition-all duration-1000 ease-out"
+            className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center space-y-5 transition-all duration-1000 ease-out"
             style={{
               opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateX(0) rotate(0deg)" : "translateX(60px) rotate(2deg)",
-              transitionDelay: "350ms",
+              transform: isVisible ? "translateY(0)" : "translateY(40px)",
+              transitionDelay: "280ms",
             }}
           >
-            <div className="relative w-full max-w-md aspect-[4/5] rounded-sm bg-[#f0e6da] p-8 sm:p-10 border border-rosegold-dark/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col items-center justify-between text-center"
-              style={{
-                backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-              }}
-            >
-              {/* Inner border */}
-              <div className="absolute inset-4 border border-crimson/15 rounded-sm pointer-events-none" />
-
-              {/* Corner flourishes */}
-              <div className="absolute top-5 left-5 w-4 h-4 border-t border-l border-crimson/30" />
-              <div className="absolute top-5 right-5 w-4 h-4 border-t border-r border-crimson/30" />
-              <div className="absolute bottom-5 left-5 w-4 h-4 border-b border-l border-crimson/30" />
-              <div className="absolute bottom-5 right-5 w-4 h-4 border-b border-r border-crimson/30" />
-
-              <p className="font-label text-[9px] tracking-[0.4em] text-crimson/80 uppercase font-bold mt-2">
-                ROYAL INVITATION TO ELEGANCE
-              </p>
-
-              <div className="my-auto space-y-3 py-4">
-                <p className="font-display text-2xl italic text-noir/70">the marriage of</p>
-                <p className="font-display text-3xl sm:text-4xl font-bold text-crimson tracking-wide">Artistry &amp; Emotion</p>
-                <p className="font-display text-2xl italic text-noir/70">composed as one</p>
-                <div className="w-16 h-px bg-crimson/30 mx-auto my-5" />
-                <p className="font-body text-xs leading-relaxed text-noir/60 px-6 max-w-xs mx-auto">
-                  From initial sit-down concept sketches to the grand reception fireworks, our crew oversees every detail with calm perfection.
-                </p>
-              </div>
-
-              {/* Wax Seal with Tassel */}
-              <div className="relative group cursor-pointer mb-2">
-                {/* Tassel string */}
-                <div className="absolute left-1/2 -translate-x-1/2 -bottom-6 w-px h-10 bg-gradient-to-b from-amber-700 to-amber-500/40" />
-                <div className="absolute left-1/2 -translate-x-1/2 -bottom-8 flex gap-0.5">
-                  <div className="w-1 h-5 bg-gradient-to-b from-amber-600 to-amber-400/30 rounded-full" />
-                  <div className="w-1 h-6 bg-gradient-to-b from-amber-600 to-amber-400/30 rounded-full" />
-                  <div className="w-1 h-5 bg-gradient-to-b from-amber-600 to-amber-400/30 rounded-full" />
-                </div>
-
-                <div className="w-20 h-20 rounded-full wax-seal grid place-items-center shadow-lg group-hover:scale-105 transition-transform duration-500">
-                  <span className="font-label text-[9px] tracking-[0.3em] font-bold text-ivory uppercase">
-                    H&amp;E
-                  </span>
-                </div>
+            {/* Architectural Mandap Card */}
+            <div className="relative w-full max-w-[380px] aspect-square rounded-[28px] sm:rounded-[32px] overflow-hidden border border-[#d8beaa]/80 shadow-[0_20px_45px_rgba(180,145,120,0.22)] bg-[#fcf6f0] p-1.5 group">
+              <div className="relative w-full h-full rounded-[24px] sm:rounded-[28px] overflow-hidden">
+                <img
+                  src="/about-mandap-card.png"
+                  alt="Architectural Mandap Stage"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "/about-mandap.jpg";
+                  }}
+                />
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Metrics Counter Bar */}
-        <div
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-noir/10 pt-12 transition-all duration-700 ease-out"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(30px)",
-            transitionDelay: "600ms",
-          }}
-        >
-          <div className="text-center">
-            <p className="font-display text-5xl sm:text-6xl font-bold text-crimson">150+</p>
-            <p className="font-label text-xs tracking-[0.22em] text-noir/60 uppercase mt-2">
-              Weddings Orchestrated
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="font-display text-5xl sm:text-6xl font-bold text-crimson">100%</p>
-            <p className="font-label text-xs tracking-[0.22em] text-noir/60 uppercase mt-2">
-              Bespoke Tailored Decor
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="font-display text-5xl sm:text-6xl font-bold text-crimson">4.9★</p>
-            <p className="font-label text-xs tracking-[0.22em] text-noir/60 uppercase mt-2">
-              Couple &amp; Guest Praise
-            </p>
-          </div>
-          <div className="text-center">
-            <p className="font-display text-5xl sm:text-6xl font-bold text-crimson">5+</p>
-            <p className="font-label text-xs tracking-[0.22em] text-noir/60 uppercase mt-2">
-              Destination Regions
-            </p>
+            {/* Enquire Now Button (Clean without H&E badge as instructed) */}
+            <button
+              type="button"
+              onClick={onOpenEnquiry}
+              className="w-full max-w-[380px] py-3.5 sm:py-4 px-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-[#fefbf7] via-[#faede0] to-[#f4ded0] border border-[#d4b59b] shadow-[0_8px_24px_rgba(195,155,125,0.2)] text-[#5c3e34] hover:text-[#38201a] font-display text-lg sm:text-xl font-bold tracking-[0.22em] uppercase flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_12px_32px_rgba(195,155,125,0.32)] hover:border-[#b88c6e] group cursor-pointer"
+            >
+              <span>ENQUIRE NOW</span>
+              <ArrowRight className="w-5 h-5 text-[#8c6046] group-hover:translate-x-1.5 transition-transform duration-300" />
+            </button>
           </div>
         </div>
       </div>

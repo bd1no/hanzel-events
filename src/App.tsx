@@ -1,76 +1,56 @@
 import { useState } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
-import { AboutStudio } from "./components/AboutStudio";
 import { ServicesSuite } from "./components/ServicesSuite";
-import { VideoReelShowcase } from "./components/VideoReelShowcase";
-import { RealWeddingStories } from "./components/RealWeddingStories";
-import { WeddingEstimator } from "./components/WeddingEstimator";
 import { TestimonialCarousel } from "./components/TestimonialCarousel";
 import { Footer } from "./components/Footer";
 import { EnquiryModal } from "./components/EnquiryModal";
 
+export type Theme = "light" | "dark";
+
+function getInitialTheme(): Theme {
+  try {
+    const stored = localStorage.getItem("hanzel_theme");
+    if (stored === "light" || stored === "dark") return stored;
+  } catch {
+    // localStorage unavailable — fall through to the default
+  }
+  return "light";
+}
+
 export default function App() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
-  const [selectedStoryId, setSelectedStoryId] = useState<string | null>(null);
-  const [estimatorData, setEstimatorData] = useState<{
-    guests?: string;
-    theme?: string;
-    focus?: string;
-    location?: string;
-  } | null>(null);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   const handleOpenEnquiry = () => {
-    setEstimatorData(null);
     setIsEnquiryOpen(true);
   };
 
-  const handleOpenEnquiryWithData = (data: {
-    guests: string;
-    theme: string;
-    focus: string;
-    location: string;
-  }) => {
-    setEstimatorData(data);
-    setIsEnquiryOpen(true);
-  };
-
-  const handleOpenStory = (storyId: string) => {
-    setSelectedStoryId(storyId);
-    // Scroll smoothly to stories section
-    const el = document.getElementById("stories");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const toggleTheme = () => {
+    setTheme((current) => {
+      const next: Theme = current === "light" ? "dark" : "light";
+      try {
+        localStorage.setItem("hanzel_theme", next);
+      } catch {
+        // ignore — theme just won't persist across reloads
+      }
+      return next;
+    });
   };
 
   return (
     <div className="min-h-screen bg-noir text-ivory selection:bg-crimson selection:text-ivory">
       {/* Top Glass Notch Header */}
-      <Header onOpenEnquiry={handleOpenEnquiry} />
+      <Header onOpenEnquiry={handleOpenEnquiry} theme={theme} onToggleTheme={toggleTheme} />
 
       {/* Hero Section */}
-      <Hero onOpenEnquiry={handleOpenEnquiry} onOpenStory={handleOpenStory} />
-
-      {/* About Studio Section */}
-      <AboutStudio />
+      <Hero onOpenEnquiry={handleOpenEnquiry} onOpenStory={() => {}} />
 
       {/* Services & Curation Suite */}
-      <ServicesSuite />
+      <ServicesSuite theme={theme} />
 
-      {/* Video Reel Showcase */}
-      <VideoReelShowcase />
-
-      {/* Real Wedding Stories Gallery */}
-      <RealWeddingStories
-        onOpenEnquiry={handleOpenEnquiry}
-        selectedStoryId={selectedStoryId}
-        onClearSelectedStory={() => setSelectedStoryId(null)}
-      />
-
-      {/* Interactive Wedding Estimator */}
-      <WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />
-
-      {/* Testimonials Praise Carousel */}
-      <TestimonialCarousel />
+      {/* Stories / Testimonials Section */}
+      <TestimonialCarousel theme={theme} />
 
       {/* Footer */}
       <Footer />
@@ -79,7 +59,7 @@ export default function App() {
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
-        initialData={estimatorData}
+        initialData={null}
       />
     </div>
   );

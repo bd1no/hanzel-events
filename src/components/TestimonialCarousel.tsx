@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Quote, ChevronLeft, ChevronRight, Star } from "lucide-react";
+import type { Theme } from "../App";
 
 const TESTIMONIALS = [
   {
@@ -25,7 +26,7 @@ const TESTIMONIALS = [
   },
 ];
 
-export function TestimonialCarousel() {
+export function TestimonialCarousel({ theme }: { theme: Theme }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -46,7 +47,20 @@ export function TestimonialCarousel() {
   };
 
   return (
-    <section className="bg-ivory text-noir py-24 px-6 relative overflow-hidden">
+    <section
+      id="stories"
+      className="text-noir py-24 px-6 relative overflow-hidden"
+      style={{ background: theme === "dark" ? "#FBF7F3" : "#fcf9f5" }}
+    >
+      {/* Background logoH watermark */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] max-w-[90vw] aspect-square pointer-events-none select-none z-0 flex items-center justify-center">
+        <img
+          src="/logoH.png"
+          alt=""
+          className="w-full h-full object-contain opacity-[0.08]"
+        />
+      </div>
+
       <div className="mx-auto max-w-4xl text-center relative z-10">
         <div className="inline-flex items-center justify-center p-3 rounded-full bg-crimson/10 text-crimson mb-6">
           <Quote className="w-6 h-6" />
