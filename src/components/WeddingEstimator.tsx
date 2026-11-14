@@ -104,9 +104,14 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
       id="estimator"
       className="relative min-h-screen overflow-hidden pt-32 pb-24 px-6 text-white"
       style={{
-        background: "#120c26 url('/estimator-bg.webp') center / cover no-repeat",
+        background: "#120c26",
       }}
     >
+      {/* Crystal background image, faded into the dark base */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-35"
+        style={{ background: "url('/estimator-bg.webp') center / cover no-repeat" }}
+      />
       {/* Darker centre so the text and panels stay readable over the crystals */}
       <div
         className="absolute inset-0 pointer-events-none"
