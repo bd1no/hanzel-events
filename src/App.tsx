@@ -98,7 +98,7 @@ export default function App() {
         </Routes>
 
         {/* Footer (not shown on the estimator page) */}
-        {pathname !== "/estimator" && <Footer />}
+        {pathname !== "/estimator" && <Footer onOpenEnquiry={handleOpenEnquiry} />}
       </div>
 
       {/* Enquiry Consultation Booking Modal — mounted only while open, so it

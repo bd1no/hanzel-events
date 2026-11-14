@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { LightShines } from "./LightShines";
 import { Star, Crown, Palette, MapPin, Sparkles } from "lucide-react";
 
 interface WeddingEstimatorProps {
@@ -44,57 +45,6 @@ function Sparkle({ className = "", style }: { className?: string; style?: React.
     <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor" aria-hidden="true">
       <path d="M12 0 C12.8 7.5 16.5 11.2 24 12 C16.5 12.8 12.8 16.5 12 24 C11.2 16.5 7.5 12.8 0 12 C7.5 11.2 11.2 7.5 12 0 Z" />
     </svg>
-  );
-}
-
-// Upright light glint: long vertical rays, shorter horizontal ones, bright core
-function GlintStar({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <svg viewBox="0 0 24 32" className={className} style={style} fill="currentColor" aria-hidden="true">
-      <path d="M12 0 C12.4 10 12.9 14.6 20 16 C12.9 17.4 12.4 22 12 32 C11.6 22 11.1 17.4 4 16 C11.1 14.6 11.6 10 12 0 Z" />
-      <circle cx="12" cy="16" r="2.2" />
-    </svg>
-  );
-}
-
-type Shine = { id: number; top: number; left: number; size: number };
-
-// Random glints of light that flash briefly across the page, a few at a time.
-// They sit in front of the glass panels; behind them the blur turns them into dots.
-function LightShines() {
-  const [shines, setShines] = useState<Shine[]>([]);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let nextId = 0;
-    const timer = window.setInterval(() => {
-      const shine: Shine = {
-        id: nextId++,
-        top: Math.random() * 100,
-        left: Math.random() * 100,
-        size: 22 + Math.random() * 30,
-      };
-      setShines((current) => [...current.slice(-5), shine]);
-      // Drop it once its 1.6s animation has finished
-      window.setTimeout(() => {
-        setShines((current) => current.filter((s) => s.id !== shine.id));
-      }, 1700);
-    }, 700);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-20" aria-hidden="true">
-      {shines.map((s) => (
-        <GlintStar
-          key={s.id}
-          className="light-shine"
-          style={{ top: `${s.top}%`, left: `${s.left}%`, width: s.size, height: s.size * (32 / 24) }}
-        />
-      ))}
-    </div>
   );
 }
 
@@ -181,9 +131,7 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
       <div className="mx-auto max-w-5xl relative z-10">
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d9b46c]/35 bg-white/[0.04] backdrop-blur font-label text-[11px] tracking-[0.25em] uppercase text-[#f3e6c8]">
-            <Star className="w-3.5 h-3.5 text-[#e6c6a4] fill-current" />
-            <span>Estimate · Plan · Celebrate</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5">
           </div>
           <h2 className="font-display text-4xl sm:text-6xl font-normal text-white mt-5 leading-[1.05]">
             Calculate your custom{" "}
@@ -301,10 +249,6 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
               boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18), inset 0 0 30px rgba(255,240,220,0.06), 0 20px 60px rgba(8,5,2,0.5), 0 0 28px rgba(245,225,195,0.22)",
             }}
           >
-            <div className="inline-flex px-4 py-1 rounded-full border border-[#d9b46c]/35 bg-white/[0.05] font-label text-[10px] tracking-[0.25em] uppercase text-[#f3e6c8]">
-              Your Wedding Breakdown
-            </div>
-
             <div>
               <p className="font-label text-xs tracking-[0.2em] text-[#e9dcc0]/90 uppercase whitespace-nowrap">
                 Estimated Planning &amp; Production
