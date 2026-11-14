@@ -68,8 +68,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-noir text-ivory selection:bg-crimson selection:text-ivory">
-      {/* Mouse glow and sparkle trail, on every page */}
-      <CursorSparkle />
+      {/* Mouse sparkle trail on every page; petals over Services and Testimonials
+          on the home page in light theme */}
+      <CursorSparkle petals={pathname === "/" && theme === "light"} />
 
       {/* Top Glass Notch Header */}
       <Header onOpenEnquiry={handleOpenEnquiry} theme={theme} onToggleTheme={toggleTheme} />

@@ -366,6 +366,25 @@ body {
   will-change: transform, opacity;
 }
 
+/* Mouse trail petal: same look as .blossom-petal, tumbling down and fading */
+.cursor-petal {
+  position: fixed;
+  pointer-events: none;
+  background: linear-gradient(135deg, #ffe3ec 0%, #f9bdd2 55%, #f2a2bd 100%);
+  border-radius: 0 100% 0 100%;
+  box-shadow: 0 0 6px rgba(242, 162, 189, 0.45);
+  animation: cursorPetal 1.6s ease-out forwards;
+}
+
+@keyframes cursorPetal {
+  0% { opacity: 0; transform: translate(-50%, -50%) rotate(0deg) scale(0.6); }
+  15% { opacity: 0.95; transform: translate(-50%, -50%) rotate(20deg) scale(1); }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--petal-drift, 20px)), calc(-50% + 55px)) rotate(var(--petal-spin, 180deg)) scale(0.8);
+  }
+}
+
 /* Estimator page: brief star-shaped glints of light */
 .light-shine {
   position: absolute;
