@@ -153,7 +153,7 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
   return (
     <section
       id="estimator"
-      className="relative min-h-screen overflow-hidden pt-32 pb-24 px-6 text-white"
+      className="page-fade-in relative min-h-screen overflow-hidden pt-32 pb-24 px-6 text-white"
       style={{
         background: "#0a0805",
       }}
