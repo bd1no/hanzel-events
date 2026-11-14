@@ -47,77 +47,6 @@ function Sparkle({ className = "", style }: { className?: string; style?: React.
   );
 }
 
-// One faceted crystal shard: a tall hexagonal prism with a light and a dark face
-function Shard({ x, y, w, h, rotate, shade = 0 }: { x: number; y: number; w: number; h: number; rotate: number; shade?: number }) {
-  const tip = h * 0.28;
-  const left = `${x},${y - h} ${x - w},${y - h + tip} ${x - w},${y} ${x},${y + w * 0.35}`;
-  const right = `${x},${y - h} ${x + w},${y - h + tip} ${x + w},${y} ${x},${y + w * 0.35}`;
-  return (
-    <g transform={`rotate(${rotate} ${x} ${y})`} opacity={1 - shade * 0.25}>
-      <polygon points={left} fill="url(#crystal-light)" stroke="#e9e2ff" strokeOpacity="0.55" strokeWidth="1.2" />
-      <polygon points={right} fill="url(#crystal-dark)" stroke="#e9e2ff" strokeOpacity="0.35" strokeWidth="1.2" />
-      <line x1={x} y1={y - h} x2={x} y2={y + w * 0.35} stroke="#ffffff" strokeOpacity="0.7" strokeWidth="1" />
-    </g>
-  );
-}
-
-// Cluster of shards growing from a corner; mirrored for the right side
-function CrystalCluster({ side }: { side: "left" | "right" }) {
-  return (
-    <svg
-      viewBox="0 0 320 900"
-      preserveAspectRatio="xMinYMid slice"
-      className={`absolute top-0 bottom-0 h-full w-[34vw] max-w-[420px] pointer-events-none opacity-80 ${
-        side === "left" ? "left-0" : "right-0 -scale-x-100"
-      }`}
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="crystal-light" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#efeaff" stopOpacity="0.95" />
-          <stop offset="45%" stopColor="#a99af0" stopOpacity="0.75" />
-          <stop offset="100%" stopColor="#4b3f9e" stopOpacity="0.55" />
-        </linearGradient>
-        <linearGradient id="crystal-dark" x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#8b7de0" stopOpacity="0.8" />
-          <stop offset="60%" stopColor="#3a2f7d" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#1b1540" stopOpacity="0.6" />
-        </linearGradient>
-        <radialGradient id="crystal-glow">
-          <stop offset="0%" stopColor="#b9a7f5" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#b9a7f5" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-
-      {/* Upper cluster */}
-      <circle cx="70" cy="230" r="170" fill="url(#crystal-glow)" />
-      <Shard x={40} y={330} w={34} h={260} rotate={-18} shade={1} />
-      <Shard x={110} y={300} w={26} h={200} rotate={14} />
-      <Shard x={20} y={260} w={22} h={150} rotate={-40} shade={2} />
-      <Shard x={150} y={340} w={18} h={120} rotate={32} shade={1} />
-
-      {/* Lower cluster */}
-      <circle cx="90" cy="760" r="200" fill="url(#crystal-glow)" />
-      <Shard x={70} y={900} w={44} h={330} rotate={8} />
-      <Shard x={150} y={910} w={30} h={230} rotate={28} shade={1} />
-      <Shard x={10} y={880} w={30} h={220} rotate={-22} shade={1} />
-      <Shard x={210} y={920} w={20} h={140} rotate={42} shade={2} />
-    </svg>
-  );
-}
-
-// Fixed positions so the star field looks the same on every render
-const STARS = [
-  { top: "8%", left: "30%", size: 10, delay: "0s" },
-  { top: "14%", left: "72%", size: 14, delay: "1.2s" },
-  { top: "36%", left: "22%", size: 8, delay: "0.6s" },
-  { top: "52%", left: "88%", size: 18, delay: "2s" },
-  { top: "68%", left: "12%", size: 12, delay: "1.6s" },
-  { top: "80%", left: "64%", size: 9, delay: "0.3s" },
-  { top: "24%", left: "92%", size: 8, delay: "2.4s" },
-  { top: "90%", left: "36%", size: 11, delay: "1s" },
-];
-
 export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProps) {
   const [guests, setGuests] = useState<string>("150-300");
   const [theme, setTheme] = useState<string>("Royal Heritage");
@@ -175,32 +104,14 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
       id="estimator"
       className="relative min-h-screen overflow-hidden pt-32 pb-24 px-6 text-white"
       style={{
-        background:
-          "radial-gradient(ellipse at 50% 35%, #2a1f4d 0%, #17112e 45%, #0b0817 100%)",
+        background: "#120c26 url('/estimator-bg.webp') center / cover no-repeat",
       }}
     >
-      {/* Star dust: two tiled layers of tiny dots */}
+      {/* Darker centre so the text and panels stay readable over the crystals */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-70"
-        style={{
-          backgroundImage:
-            "radial-gradient(1px 1px at 20px 30px, #fff, transparent), radial-gradient(1px 1px at 120px 80px, #d9d0ff, transparent), radial-gradient(1.5px 1.5px at 200px 160px, #fff, transparent), radial-gradient(1px 1px at 60px 190px, #cfc4ff, transparent)",
-          backgroundSize: "240px 240px",
-        }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(14,9,32,0.55) 0%, rgba(14,9,32,0.25) 55%, transparent 80%)" }}
       />
-      {STARS.map((s, i) => (
-        <Sparkle
-          key={i}
-          className="absolute text-[#fff4dc] animate-pulse-glow pointer-events-none"
-          style={{ top: s.top, left: s.left, width: s.size, height: s.size, animationDelay: s.delay }}
-        />
-      ))}
-
-      {/* Crystal clusters framing the page */}
-      <div className="hidden md:block">
-        <CrystalCluster side="left" />
-        <CrystalCluster side="right" />
-      </div>
 
       <div className="mx-auto max-w-5xl relative z-10">
         {/* Heading */}
