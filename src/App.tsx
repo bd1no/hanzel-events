@@ -7,6 +7,7 @@ import { TestimonialCarousel } from "./components/TestimonialCarousel";
 import { WeddingEstimator } from "./components/WeddingEstimator";
 import { ContactPage } from "./components/ContactPage";
 import { EnquiryModal } from "./components/EnquiryModal";
+import { CursorSparkle } from "./components/CursorSparkle";
 
 export type Theme = "light" | "dark";
 
@@ -67,6 +68,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-noir text-ivory selection:bg-crimson selection:text-ivory">
+      {/* Mouse glow and sparkle trail, on every page */}
+      <CursorSparkle />
+
       {/* Top Glass Notch Header */}
       <Header onOpenEnquiry={handleOpenEnquiry} theme={theme} onToggleTheme={toggleTheme} />
 
