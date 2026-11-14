@@ -10,6 +10,15 @@ interface WeddingEstimatorProps {
   }) => void;
 }
 
+// e.g. 15000 → "€15,000"
+function formatEuros(amount: number) {
+  return new Intl.NumberFormat("en-IE", {
+    style: "currency",
+    currency: "EUR",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
 export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProps) {
   const [guests, setGuests] = useState<string>("150-300");
   const [theme, setTheme] = useState<string>("Royal Heritage");
@@ -18,7 +27,7 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
 
   // Dynamic Output Calculations
   const getEstimatedRange = () => {
-    let baseMin = 15; // in Lakhs INR
+    let baseMin = 15; // in thousands of euros
     let baseMax = 35;
 
     if (guests === "500+") {
@@ -42,7 +51,7 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
       baseMax += 20;
     }
 
-    return `₹${baseMin} L – ₹${baseMax} L`;
+    return `${formatEuros(baseMin * 1000)} – ${formatEuros(baseMax * 1000)}`;
   };
 
   const getPalette = () => {

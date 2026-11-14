@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { ServicesSuite } from "./components/ServicesSuite";
 import { TestimonialCarousel } from "./components/TestimonialCarousel";
+import { WeddingEstimator } from "./components/WeddingEstimator";
 import { Footer } from "./components/Footer";
 import { EnquiryModal } from "./components/EnquiryModal";
 
 export type Theme = "light" | "dark";
+
+// Choices made in the estimator, used to pre-fill the enquiry form
+type EnquiryData = {
+  guests?: string;
+  theme?: string;
+  focus?: string;
+  location?: string;
+};
 
 function getInitialTheme(): Theme {
   try {
@@ -20,9 +30,26 @@ function getInitialTheme(): Theme {
 
 export default function App() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [enquiryData, setEnquiryData] = useState<EnquiryData | null>(null);
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const { pathname, hash } = useLocation();
+
+  // Start each page at the top, unless the link points at a section (e.g. /#services)
+  useEffect(() => {
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   const handleOpenEnquiry = () => {
+    setEnquiryData(null);
+    setIsEnquiryOpen(true);
+  };
+
+  const handleOpenEnquiryWithData = (data: EnquiryData) => {
+    setEnquiryData(data);
     setIsEnquiryOpen(true);
   };
 
@@ -43,24 +70,47 @@ export default function App() {
       {/* Top Glass Notch Header */}
       <Header onOpenEnquiry={handleOpenEnquiry} theme={theme} onToggleTheme={toggleTheme} />
 
-      {/* Hero Section */}
-      <Hero onOpenEnquiry={handleOpenEnquiry} onOpenStory={() => {}} />
+      <Routes>
+        {/* Home page */}
+        <Route
+          path="/"
+          element={
+            <>
+              {/* Hero Section */}
+              <Hero onOpenEnquiry={handleOpenEnquiry} onOpenStory={() => {}} />
 
-      {/* Services & Curation Suite */}
-      <ServicesSuite theme={theme} />
+              {/* Services & Curation Suite */}
+              <ServicesSuite theme={theme} />
 
-      {/* Stories / Testimonials Section */}
-      <TestimonialCarousel theme={theme} />
+              {/* Stories / Testimonials Section */}
+              <TestimonialCarousel theme={theme} />
+            </>
+          }
+        />
+
+        {/* Budget Estimator page */}
+        <Route
+          path="/estimator"
+          element={
+            <div className="pt-16">
+              <WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />
+            </div>
+          }
+        />
+      </Routes>
 
       {/* Footer */}
       <Footer />
 
-      {/* Enquiry Consultation Booking Modal */}
-      <EnquiryModal
-        isOpen={isEnquiryOpen}
-        onClose={() => setIsEnquiryOpen(false)}
-        initialData={null}
-      />
+      {/* Enquiry Consultation Booking Modal — mounted only while open, so it
+          picks up fresh estimator choices each time */}
+      {isEnquiryOpen && (
+        <EnquiryModal
+          isOpen
+          onClose={() => setIsEnquiryOpen(false)}
+          initialData={enquiryData}
+        />
+      )}
     </div>
   );
 }

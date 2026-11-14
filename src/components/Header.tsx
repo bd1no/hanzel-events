@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X, Calendar, Sparkles, Sun, Moon } from "lucide-react";
 import type { Theme } from "../App";
 
@@ -51,7 +52,7 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
               <span>Enquire</span>
             </button>
             <a
-              href="#services"
+              href="/#services"
               className="font-label text-xs tracking-[0.25em] text-ivory/90 transition-all hover:text-rosegold hover:scale-105 uppercase font-medium hidden sm:inline-block"
             >
               Services
@@ -61,7 +62,7 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
           {/* Central Logo Container with Downward Notch (Matches Figma Prototype & AI Concept) */}
           <div className="absolute left-1/2 -translate-x-1/2 top-[-10px] md:top-[-14px]">
             <a
-              href="#top"
+              href="/"
               className="group relative flex items-center justify-center bg-[#f8f4ef] px-6 py-2.5 sm:px-8 sm:py-3 rounded-b-3xl shadow-[0_10px_25px_rgba(0,0,0,0.5)] border-x border-b border-rosegold/30 transition-transform duration-300 hover:scale-105"
             >
               {/* The source PNG has a lot of built-in whitespace around the mark, so a
@@ -82,12 +83,14 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
 
           {/* Right Nav Wing */}
           <div className="flex-1 flex items-center justify-between pl-8 sm:pl-20 md:pl-32">
-            <a
-              href="#stories"
-              className="font-label text-xs tracking-[0.25em] text-ivory/90 transition-all hover:text-rosegold hover:scale-105 uppercase font-medium hidden sm:inline-block"
+            <Link
+              to="/estimator"
+              className="font-label text-xs tracking-[0.25em] text-ivory/90 transition-all hover:text-rosegold hover:scale-105 uppercase font-medium hidden sm:inline-block whitespace-nowrap"
             >
-              Stories
-            </a>
+              {/* Shorter label where the header wings are narrow */}
+              <span className="xl:hidden">Budget</span>
+              <span className="hidden xl:inline">Budget Estimator</span>
+            </Link>
             <a
               href="#contact"
               className="font-label text-xs tracking-[0.25em] text-ivory/90 transition-all hover:text-rosegold hover:scale-105 uppercase font-medium"
@@ -110,19 +113,19 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
         {mobileMenuOpen && (
           <div className="sm:hidden mt-3 rounded-2xl glass-header-scrolled p-6 flex flex-col gap-4 text-center border border-rosegold/20 animate-fadeIn">
             <a
-              href="#services"
+              href="/#services"
               onClick={() => setMobileMenuOpen(false)}
               className="font-label text-sm tracking-[0.2em] text-ivory/90 py-2 border-b border-white/10"
             >
               SERVICES
             </a>
-            <a
-              href="#stories"
+            <Link
+              to="/estimator"
               onClick={() => setMobileMenuOpen(false)}
               className="font-label text-sm tracking-[0.2em] text-ivory/90 py-2 border-b border-white/10"
             >
-              STORIES
-            </a>
+              BUDGET ESTIMATOR
+            </Link>
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}

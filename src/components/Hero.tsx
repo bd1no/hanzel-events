@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Volume2, VolumeX, Play, Pause, ArrowRight, Heart } from "lucide-react";
 
 interface HeroProps {
@@ -172,12 +173,12 @@ export function Hero({ onOpenEnquiry, onOpenStory }: HeroProps) {
             <ArrowRight className="w-4 h-4 text-crimson group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <a
-            href="#stories"
+          <Link
+            to="/estimator"
             className="glass-header px-8 py-3.5 rounded-full font-label text-xs tracking-[0.24em] text-ivory hover:text-rosegold border border-ivory/20 hover:border-rosegold/50 transition-all uppercase"
           >
-            Explore Real Stories
-          </a>
+            Calculate Wedding Budget
+          </Link>
         </div>
       </div>
 
