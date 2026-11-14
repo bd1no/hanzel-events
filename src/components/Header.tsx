@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Calendar, Sparkles, Sun, Moon } from "lucide-react";
 import type { Theme } from "../App";
 
@@ -12,6 +12,9 @@ interface HeaderProps {
 export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  // The theme only changes the home page, so the toggle is hidden elsewhere
+  const showThemeToggle = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,16 +27,18 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 py-3 md:px-6 md:py-4 transition-all duration-500">
       {/* Light / dark mode toggle — top right of the screen, level with the nav */}
-      <button
-        onClick={onToggleTheme}
-        className={`fixed top-3 right-3 md:top-4 md:right-6 z-50 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center transition-all duration-300 ${
-          scrolled ? "glass-header-scrolled" : "glass-header"
-        } text-ivory hover:text-rosegold hover:scale-105`}
-        aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
-        title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
-      >
-        {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-      </button>
+      {showThemeToggle && (
+        <button
+          onClick={onToggleTheme}
+          className={`fixed top-3 right-3 md:top-4 md:right-6 z-50 w-10 h-10 md:w-11 md:h-11 rounded-full flex items-center justify-center transition-all duration-300 ${
+            scrolled ? "glass-header-scrolled" : "glass-header"
+          } text-ivory hover:text-rosegold hover:scale-105`}
+          aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+          title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+        >
+          {theme === "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
+        </button>
+      )}
 
       <div className="mx-auto max-w-6xl relative">
         {/* Main Nav pill with notch shape */}
