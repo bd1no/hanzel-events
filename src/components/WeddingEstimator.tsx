@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Star, Crown, Palette, MapPin, Sparkles } from "lucide-react";
 
 interface WeddingEstimatorProps {
@@ -44,6 +44,46 @@ function Sparkle({ className = "", style }: { className?: string; style?: React.
     <svg viewBox="0 0 24 24" className={className} style={style} fill="currentColor" aria-hidden="true">
       <path d="M12 0 C12.8 7.5 16.5 11.2 24 12 C16.5 12.8 12.8 16.5 12 24 C11.2 16.5 7.5 12.8 0 12 C7.5 11.2 11.2 7.5 12 0 Z" />
     </svg>
+  );
+}
+
+type Shine = { id: number; top: number; left: number; size: number };
+
+// Random glints of light that flash briefly across the page, a few at a time
+function LightShines() {
+  const [shines, setShines] = useState<Shine[]>([]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let nextId = 0;
+    const timer = window.setInterval(() => {
+      const shine: Shine = {
+        id: nextId++,
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        size: 14 + Math.random() * 26,
+      };
+      setShines((current) => [...current.slice(-5), shine]);
+      // Drop it once its 1.6s animation has finished
+      window.setTimeout(() => {
+        setShines((current) => current.filter((s) => s.id !== shine.id));
+      }, 1700);
+    }, 700);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none z-[5]" aria-hidden="true">
+      {shines.map((s) => (
+        <Sparkle
+          key={s.id}
+          className="light-shine"
+          style={{ top: `${s.top}%`, left: `${s.left}%`, width: s.size, height: s.size }}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -117,6 +157,9 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
         className="absolute inset-0 pointer-events-none"
         style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(10,8,5,0.45) 0%, rgba(10,8,5,0.15) 55%, transparent 80%)" }}
       />
+
+      {/* Occasional glints of light */}
+      <LightShines />
 
       <div className="mx-auto max-w-5xl relative z-10">
         {/* Heading */}
