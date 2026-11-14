@@ -91,11 +91,7 @@ export default function App() {
         {/* Budget Estimator page */}
         <Route
           path="/estimator"
-          element={
-            <div className="pt-16">
-              <WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />
-            </div>
-          }
+          element={<WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />}
         />
       </Routes>
 
