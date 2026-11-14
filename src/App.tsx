@@ -5,7 +5,7 @@ import { Hero } from "./components/Hero";
 import { ServicesSuite } from "./components/ServicesSuite";
 import { TestimonialCarousel } from "./components/TestimonialCarousel";
 import { WeddingEstimator } from "./components/WeddingEstimator";
-import { Footer } from "./components/Footer";
+import { ContactPage } from "./components/ContactPage";
 import { EnquiryModal } from "./components/EnquiryModal";
 
 export type Theme = "light" | "dark";
@@ -95,10 +95,10 @@ export default function App() {
             path="/estimator"
             element={<WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />}
           />
-        </Routes>
 
-        {/* Footer (not shown on the estimator page) */}
-        {pathname !== "/estimator" && <Footer onOpenEnquiry={handleOpenEnquiry} />}
+          {/* Contact page */}
+          <Route path="/contact" element={<ContactPage onOpenEnquiry={handleOpenEnquiry} />} />
+        </Routes>
       </div>
 
       {/* Enquiry Consultation Booking Modal — mounted only while open, so it

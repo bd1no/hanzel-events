@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MapPin, Mail, Phone, Globe, Star, ArrowUp, Calculator } from "lucide-react";
 import { LightShines } from "./LightShines";
 
-interface FooterProps {
+interface ContactPageProps {
   onOpenEnquiry: () => void;
 }
 
@@ -40,10 +40,10 @@ function DiamondDivider() {
   );
 }
 
-export function Footer({ onOpenEnquiry }: FooterProps) {
+export function ContactPage({ onOpenEnquiry }: ContactPageProps) {
   return (
-    <footer id="contact" className="relative overflow-hidden bg-noir text-ivory pt-28 pb-10 px-6">
-      {/* Gold crystal backdrop, faded in from the section above and darker at the very bottom */}
+    <section id="contact" className="relative min-h-screen overflow-hidden bg-noir text-ivory pt-36 pb-10 px-6">
+      {/* Gold crystal backdrop, darker towards the bottom */}
       <div
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{ background: "url('/estimator-bg-gold.webp') center / cover no-repeat" }}
@@ -52,7 +52,7 @@ export function Footer({ onOpenEnquiry }: FooterProps) {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, #0b090c 0%, rgba(11,9,12,0.4) 30%, rgba(11,9,12,0.25) 60%, rgba(11,9,12,0.7) 100%)",
+            "linear-gradient(to bottom, rgba(11,9,12,0.55) 0%, rgba(11,9,12,0.3) 30%, rgba(11,9,12,0.25) 60%, rgba(11,9,12,0.7) 100%)",
         }}
       />
       <LightShines every={1100} />
@@ -137,8 +137,8 @@ export function Footer({ onOpenEnquiry }: FooterProps) {
           <div className="lg:col-span-2">
             <p className={columnTitle}>Explore</p>
             <ul className="space-y-3">
-              <li><a href="#services" className={linkStyle}>Services</a></li>
-              <li><a href="#stories" className={linkStyle}>Testimonials</a></li>
+              <li><a href="/#services" className={linkStyle}>Services</a></li>
+              <li><a href="/#stories" className={linkStyle}>Testimonials</a></li>
               <li><Link to="/estimator" className={linkStyle}>Budget Estimator</Link></li>
               <li>
                 <button onClick={onOpenEnquiry} className={linkStyle}>
@@ -192,12 +192,12 @@ export function Footer({ onOpenEnquiry }: FooterProps) {
         {/* Bottom bar */}
         <div className="pt-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-label text-[10px] tracking-[0.2em] text-[#e9dcc0]/45 uppercase">
           <p>© {new Date().getFullYear()} Hanzel Events · Hanzel Group. All rights reserved.</p>
-          <a href="#top" className="flex items-center gap-2 hover:text-white transition-colors">
+          <a href="#contact" className="flex items-center gap-2 hover:text-white transition-colors">
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>
-    </footer>
+    </section>
   );
 }

@@ -91,12 +91,12 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
               <span className="xl:hidden">Budget</span>
               <span className="hidden xl:inline">Budget Estimator</span>
             </Link>
-            <a
-              href="/#contact"
+            <Link
+              to="/contact"
               className="font-label text-xs tracking-[0.25em] text-ivory/90 transition-all hover:text-rosegold hover:scale-105 uppercase font-medium"
             >
               Contact
-            </a>
+            </Link>
 
             {/* Mobile menu toggle */}
             <button
@@ -126,13 +126,13 @@ export function Header({ onOpenEnquiry, theme, onToggleTheme }: HeaderProps) {
             >
               BUDGET ESTIMATOR
             </Link>
-            <a
-              href="/#contact"
+            <Link
+              to="/contact"
               onClick={() => setMobileMenuOpen(false)}
               className="font-label text-sm tracking-[0.2em] text-ivory/90 py-2 border-b border-white/10"
             >
               CONTACT
-            </a>
+            </Link>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
