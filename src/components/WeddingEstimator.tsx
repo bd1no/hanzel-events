@@ -169,6 +169,12 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
         style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(10,8,5,0.45) 0%, rgba(10,8,5,0.15) 55%, transparent 80%)" }}
       />
 
+      {/* Bottom fade: darkens towards the end of the page without going fully black */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, transparent 50%, rgba(10,8,5,0.35) 75%, rgba(10,8,5,0.65) 100%)" }}
+      />
+
       {/* Occasional glints of light */}
       <LightShines />
 
