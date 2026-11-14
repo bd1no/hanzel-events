@@ -31,12 +31,12 @@ const prettyRange = (val: string) => val.replace("-", "–");
 function pillClass(selected: boolean, extra = "") {
   return `py-2.5 rounded-full font-body text-sm transition-all duration-300 ${extra} ${
     selected
-      ? "text-white shadow-[0_0_22px_rgba(139,124,240,0.55)] border border-[#c7bbff]/60"
-      : "bg-white/[0.03] text-[#ddd6f5]/85 border border-[#b9a7f5]/15 hover:border-[#b9a7f5]/45 hover:bg-white/[0.06]"
+      ? "text-[#1a1206] font-semibold shadow-[0_0_22px_rgba(212,165,80,0.5)] border border-[#f0d89a]/70"
+      : "bg-white/[0.03] text-[#e9dcc0]/85 border border-[#d9b46c]/15 hover:border-[#d9b46c]/45 hover:bg-white/[0.06]"
   }`;
 }
 
-const SELECTED_BG = { background: "linear-gradient(135deg, #5b55d0 0%, #8f7ae6 55%, #b3a3f3 100%)" };
+const SELECTED_BG = { background: "linear-gradient(135deg, #8a5a1c 0%, #c9973f 50%, #ecc977 100%)" };
 
 // Four-point sparkle used in the badge divider and the star field
 function Sparkle({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
@@ -86,7 +86,7 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
   const getPalette = () => {
     switch (theme) {
       case "Royal Heritage":
-        return ["#6f68d8", "#cfc3d9", "#3e4a78", "#c9a86a"];
+        return ["#8b1e2d", "#d4af37", "#141014", "#f8f4ef"];
       case "Coastal Boho Luxe":
         return ["#e5b8a6", "#2c5e53", "#f8f4ef", "#d4af37"];
       case "Botanical Romance":
@@ -96,7 +96,7 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
     }
   };
 
-  const stepLabel = "font-label text-xs tracking-[0.25em] text-[#e4ddfb] uppercase font-semibold mb-3 flex items-center gap-2.5";
+  const stepLabel = "font-label text-xs tracking-[0.25em] text-[#f3e6c8] uppercase font-semibold mb-3 flex items-center gap-2.5";
   const stepIcon = "w-4 h-4 text-[#d9b46c]";
 
   return (
@@ -115,26 +115,26 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
       {/* Darker centre so the text and panels stay readable over the crystals */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(14,9,32,0.55) 0%, rgba(14,9,32,0.25) 55%, transparent 80%)" }}
+        style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(10,8,5,0.55) 0%, rgba(10,8,5,0.25) 55%, transparent 80%)" }}
       />
 
       <div className="mx-auto max-w-5xl relative z-10">
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#b9a7f5]/35 bg-white/[0.04] backdrop-blur font-label text-[11px] tracking-[0.25em] uppercase text-[#e4ddfb]">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#d9b46c]/35 bg-white/[0.04] backdrop-blur font-label text-[11px] tracking-[0.25em] uppercase text-[#f3e6c8]">
             <Star className="w-3.5 h-3.5 text-[#d9b46c] fill-current" />
             <span>Estimate · Plan · Celebrate</span>
           </div>
           <h2 className="font-display text-4xl sm:text-6xl font-normal text-white mt-5 leading-[1.05]">
             Calculate your custom{" "}
-            <em className="italic text-[#c9bcff]">wedding scope.</em>
+            <em className="italic text-[#e8c378]">wedding scope.</em>
           </h2>
           <div className="flex items-center justify-center gap-3 my-4" aria-hidden="true">
-            <span className="w-12 h-px bg-gradient-to-r from-transparent to-[#c9bcff]/70" />
-            <Sparkle className="w-3.5 h-3.5 text-[#e4ddfb]" />
-            <span className="w-12 h-px bg-gradient-to-l from-transparent to-[#c9bcff]/70" />
+            <span className="w-12 h-px bg-gradient-to-r from-transparent to-[#e8c378]/70" />
+            <Sparkle className="w-3.5 h-3.5 text-[#f3e6c8]" />
+            <span className="w-12 h-px bg-gradient-to-l from-transparent to-[#e8c378]/70" />
           </div>
-          <p className="font-body text-sm sm:text-base text-[#ddd6f5]/85">
+          <p className="font-body text-sm sm:text-base text-[#e9dcc0]/85">
             Select your guest scale, dream aesthetic, and destination region to generate an instant estimate breakdown and recommended color palette.
           </p>
         </div>
@@ -142,10 +142,10 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
         <div className="grid lg:grid-cols-12 gap-8 items-start">
           {/* Options Input Form */}
           <div
-            className="lg:col-span-7 rounded-[28px] p-6 sm:p-8 space-y-7 border border-[#b9a7f5]/30 backdrop-blur-md"
+            className="lg:col-span-7 rounded-[28px] p-6 sm:p-8 space-y-7 border border-[#d9b46c]/30 backdrop-blur-md"
             style={{
-              background: "linear-gradient(160deg, rgba(58,44,104,0.55) 0%, rgba(22,16,44,0.65) 100%)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 60px rgba(10,6,30,0.6), 0 0 40px rgba(139,124,240,0.12)",
+              background: "linear-gradient(160deg, rgba(62,46,22,0.55) 0%, rgba(20,14,8,0.65) 100%)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08), 0 20px 60px rgba(8,5,2,0.6), 0 0 40px rgba(212,165,80,0.12)",
             }}
           >
             {/* Step 1: Guest Count */}
@@ -235,45 +235,45 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
 
           {/* Results Summary Box */}
           <div
-            className="lg:col-span-5 rounded-[28px] p-7 sm:p-8 space-y-6 text-center border border-[#b9a7f5]/35 backdrop-blur-md"
+            className="lg:col-span-5 rounded-[28px] p-7 sm:p-8 space-y-6 text-center border border-[#d9b46c]/35 backdrop-blur-md"
             style={{
-              background: "linear-gradient(170deg, rgba(64,48,112,0.6) 0%, rgba(24,18,48,0.7) 100%)",
-              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 60px rgba(10,6,30,0.6), 0 0 50px rgba(139,124,240,0.18)",
+              background: "linear-gradient(170deg, rgba(68,50,24,0.6) 0%, rgba(22,16,9,0.7) 100%)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1), 0 20px 60px rgba(8,5,2,0.6), 0 0 50px rgba(212,165,80,0.18)",
             }}
           >
-            <div className="inline-flex px-4 py-1 rounded-full border border-[#b9a7f5]/35 bg-white/[0.05] font-label text-[10px] tracking-[0.25em] uppercase text-[#e4ddfb]">
+            <div className="inline-flex px-4 py-1 rounded-full border border-[#d9b46c]/35 bg-white/[0.05] font-label text-[10px] tracking-[0.25em] uppercase text-[#f3e6c8]">
               Your Wedding Breakdown
             </div>
 
             <div>
-              <p className="font-label text-xs tracking-[0.2em] text-[#ddd6f5]/90 uppercase whitespace-nowrap">
+              <p className="font-label text-xs tracking-[0.2em] text-[#e9dcc0]/90 uppercase whitespace-nowrap">
                 Estimated Planning &amp; Production
               </p>
               <p
                 className="font-display text-5xl sm:text-6xl font-semibold mt-3 leading-[1.05] bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(180deg, #f3efff 0%, #c9bcff 55%, #9d8cf0 100%)",
-                  filter: "drop-shadow(0 0 18px rgba(185,167,245,0.35))",
+                  backgroundImage: "linear-gradient(180deg, #fff6dc 0%, #e8c378 55%, #b8862f 100%)",
+                  filter: "drop-shadow(0 0 18px rgba(217,180,108,0.35))",
                 }}
               >
                 {getEstimatedRange()}
               </p>
-              <p className="font-label text-[10px] tracking-[0.2em] text-[#ddd6f5]/70 uppercase mt-3">
+              <p className="font-label text-[10px] tracking-[0.2em] text-[#e9dcc0]/70 uppercase mt-3">
                 Typical cost range for a {prettyRange(guests)} guest wedding
               </p>
               <Sparkle className="w-3 h-3 text-[#d9b46c] mx-auto mt-3" />
             </div>
 
             {/* Custom Palette Preview */}
-            <div className="rounded-2xl border border-[#b9a7f5]/25 bg-white/[0.03] p-4 space-y-3">
-              <span className="font-label text-[10px] tracking-[0.25em] text-[#e4ddfb] uppercase block">
+            <div className="rounded-2xl border border-[#d9b46c]/25 bg-white/[0.03] p-4 space-y-3">
+              <span className="font-label text-[10px] tracking-[0.25em] text-[#f3e6c8] uppercase block">
                 Recommended Palette
               </span>
               <div className="flex items-center justify-center gap-3">
                 {getPalette().map((hex, i) => (
                   <div
                     key={i}
-                    className="w-10 h-10 rounded-full border border-white/30 shadow-[0_0_14px_rgba(185,167,245,0.35)] transition-transform hover:scale-125"
+                    className="w-10 h-10 rounded-full border border-white/30 shadow-[0_0_14px_rgba(217,180,108,0.35)] transition-transform hover:scale-125"
                     style={{ backgroundColor: hex }}
                     title={`Color ${hex}`}
                   />
@@ -291,10 +291,10 @@ export function WeddingEstimator({ onOpenEnquiryWithData }: WeddingEstimatorProp
                   location,
                 })
               }
-              className="relative w-full overflow-hidden py-4 px-6 rounded-full font-label text-xs tracking-[0.25em] text-[#1d1640] font-bold uppercase flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] border border-white/60 shadow-[0_0_30px_rgba(185,167,245,0.45)]"
-              style={{ background: "linear-gradient(120deg, #cdbff7 0%, #f1ecff 35%, #b4a3f0 65%, #e3dbff 100%)" }}
+              className="relative w-full overflow-hidden py-4 px-6 rounded-full font-label text-xs tracking-[0.25em] text-[#1f1505] font-bold uppercase flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] border border-white/60 shadow-[0_0_30px_rgba(217,180,108,0.45)]"
+              style={{ background: "linear-gradient(120deg, #d9ae5c 0%, #fbefc9 35%, #c9973f 65%, #f1d995 100%)" }}
             >
-              <Star className="w-3.5 h-3.5 text-[#c99a3e] fill-current" />
+              <Star className="w-3.5 h-3.5 text-[#7a4e12] fill-current" />
               <span>Book Consultation With This Scope</span>
             </button>
           </div>
