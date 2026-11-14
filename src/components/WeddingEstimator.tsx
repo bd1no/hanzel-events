@@ -31,12 +31,12 @@ const prettyRange = (val: string) => val.replace("-", "–");
 function pillClass(selected: boolean, extra = "") {
   return `py-2.5 rounded-full font-body text-sm transition-all duration-300 ${extra} ${
     selected
-      ? "text-[#1a1206] font-semibold shadow-[0_0_22px_rgba(212,165,80,0.5)] border border-[#f0d89a]/70"
+      ? "text-[#1a1206] font-semibold shadow-[0_0_18px_rgba(248,244,239,0.25)] border border-[#d9b46c]/60"
       : "bg-white/[0.03] text-[#e9dcc0]/85 border border-[#d9b46c]/15 hover:border-[#d9b46c]/45 hover:bg-white/[0.06]"
   }`;
 }
 
-const SELECTED_BG = { background: "linear-gradient(135deg, #8a5a1c 0%, #c9973f 50%, #ecc977 100%)" };
+const SELECTED_BG = { background: "linear-gradient(135deg, #fbf8f2 0%, #f8f4ef 50%, #eae2d8 100%)" };
 
 // Four-point sparkle used in the badge divider and the star field
 function Sparkle({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
