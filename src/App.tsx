@@ -70,33 +70,36 @@ export default function App() {
       {/* Top Glass Notch Header */}
       <Header onOpenEnquiry={handleOpenEnquiry} theme={theme} onToggleTheme={toggleTheme} />
 
-      <Routes>
-        {/* Home page */}
-        <Route
-          path="/"
-          element={
-            <>
-              {/* Hero Section */}
-              <Hero onOpenEnquiry={handleOpenEnquiry} onOpenStory={() => {}} />
+      {/* Page content fades in on every page change (keyed by path so it replays) */}
+      <div key={pathname} className="page-fade-in">
+        <Routes>
+          {/* Home page */}
+          <Route
+            path="/"
+            element={
+              <>
+                {/* Hero Section */}
+                <Hero onOpenEnquiry={handleOpenEnquiry} onOpenStory={() => {}} />
 
-              {/* Services & Curation Suite */}
-              <ServicesSuite theme={theme} />
+                {/* Services & Curation Suite */}
+                <ServicesSuite theme={theme} />
 
-              {/* Stories / Testimonials Section */}
-              <TestimonialCarousel theme={theme} />
-            </>
-          }
-        />
+                {/* Stories / Testimonials Section */}
+                <TestimonialCarousel theme={theme} />
+              </>
+            }
+          />
 
-        {/* Budget Estimator page */}
-        <Route
-          path="/estimator"
-          element={<WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />}
-        />
-      </Routes>
+          {/* Budget Estimator page */}
+          <Route
+            path="/estimator"
+            element={<WeddingEstimator onOpenEnquiryWithData={handleOpenEnquiryWithData} />}
+          />
+        </Routes>
 
-      {/* Footer (not shown on the estimator page) */}
-      {pathname !== "/estimator" && <Footer />}
+        {/* Footer (not shown on the estimator page) */}
+        {pathname !== "/estimator" && <Footer />}
+      </div>
 
       {/* Enquiry Consultation Booking Modal — mounted only while open, so it
           picks up fresh estimator choices each time */}
